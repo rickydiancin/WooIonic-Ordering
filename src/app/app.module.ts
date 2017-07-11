@@ -4,30 +4,64 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { MenuPage } from '../pages/menu/menu';
+import { ProductsByCategoryPage } from '../pages/products-by-category/products-by-category';
+import { ProductDetailsPage } from '../pages/product-details/product-details';
+import { CartPage } from '../pages/cart/cart';
+import { SignupPage } from '../pages/signup/signup';
+import { LoginPage } from '../pages/login/login';
+import { CheckoutPage } from '../pages/checkout/checkout';
+import { AccountInfoPage } from '../pages/account-info/account-info';
+import { SearchPage } from '../pages/search/search';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HttpModule } from '@angular/http';
+
+import { IonicStorageModule } from '@ionic/storage';
+import { OneSignal } from '@ionic-native/onesignal';
+import{ PayPal } from '@ionic-native/paypal';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    MenuPage,
+    ProductsByCategoryPage,
+    ProductDetailsPage,
+    CartPage,
+    SignupPage,
+    LoginPage,
+    CheckoutPage,
+    AccountInfoPage,
+    SearchPage
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    MenuPage,
+    ProductsByCategoryPage,
+    ProductDetailsPage,
+    CartPage,
+    SignupPage,
+    LoginPage,
+    CheckoutPage,
+    AccountInfoPage,
+    SearchPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    OneSignal,
+    PayPal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

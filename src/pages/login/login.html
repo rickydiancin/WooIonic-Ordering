@@ -1,0 +1,38 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card style="margin:0px;border:none;width:100%;">  
+    <img src="./assets/images/logo.png" style = "width:70%;margin:auto;padding:20px;"/>
+  </ion-card>
+
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Username or Email</ion-label>
+      <ion-input type="email" [(ngModel)]="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <button ion-button block color="danger" (click)="login()">Login</button>
+  <button ion-button clear block color="danger">No account? Sign up here</button>
+
+</ion-content>
