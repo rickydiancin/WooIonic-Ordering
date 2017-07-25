@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import * as WooCommerceAPI  from 'woocommerce-api';
-import { HomePage } from '../home/home';
-import { MenuPage } from '../menu/menu';
+import * as WC  from 'woocommerce-api';
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal';
 
-
+@IonicPage({})
 @Component({
   selector: 'page-checkout',
   templateUrl: 'checkout.html',
@@ -42,10 +40,10 @@ export class CheckoutPage {
       },
     ];
 
-    this.WooCommerce = new WooCommerceAPI ({
-      url: "http://localhost/woocommercestore",
-      consumerKey: "ck_91260d8413594f2a968e120c2646f5d0f1112793",
-      consumerSecret: "cs_18af990b31a0fbb5eab46767ead504a3caaaf201"
+    this.WooCommerce = WC({
+      url: "http://app.tinkertech.biz",
+      consumerKey: "ck_443268489763fa3622be2c9a7721ae33d3e24833",
+      consumerSecret: "cs_4fe14a3953f4b4abfdb44e4a0ab3d61f4d5ca2e5"
     });
 
     this.storage.get("userLoginInfo").then( (userLoginInfo)=> {
@@ -55,6 +53,7 @@ export class CheckoutPage {
 
       this.WooCommerce.getAsync("customers/email/" + email).then( (data)=> {
         this.newOrder = JSON.parse(data.body).customer;
+        console.log(this.newOrder);
       })
 
     });
@@ -154,7 +153,7 @@ export class CheckoutPage {
     
         this.WooCommerce.postAsync("orders", orderData).then((data) => {
           let response = (JSON.parse(data.body).order);
-
+          console.log(response);
           this.storage.set("cart", []).then( ()=> {
             console.log("Cart is empty.");
           })
@@ -165,7 +164,7 @@ export class CheckoutPage {
             buttons: [{
               text: "OK",
               handler: () => {
-               this.navCtrl.setRoot(MenuPage);
+               this.navCtrl.setRoot('MenuPage');
               }
             }]
           }).present();

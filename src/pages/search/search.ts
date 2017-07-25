@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
-import { ProductDetailsPage } from '../product-details/product-details';
 import * as WC from 'woocommerce-api';
 
 @Component({
@@ -19,9 +18,9 @@ export class SearchPage {
     this.searchQuery = this.navParams.get("searchQuery");
 
     this.WooCommerce = WC({
-      url: "http://localhost/woocommercestore",
-      consumerKey: "ck_91260d8413594f2a968e120c2646f5d0f1112793",
-      consumerSecret: "cs_18af990b31a0fbb5eab46767ead504a3caaaf201"
+      url: "http://app.tinkertech.biz",
+      consumerKey: "ck_443268489763fa3622be2c9a7721ae33d3e24833",
+      consumerSecret: "cs_4fe14a3953f4b4abfdb44e4a0ab3d61f4d5ca2e5"
     });
 
     this.WooCommerce.getAsync("products?filter[q]=" + this.searchQuery).then((searchData)=> {
@@ -42,10 +41,10 @@ export class SearchPage {
       if(JSON.parse(searchData.body).products < 10) {
         event.enable(false);
 
-        this.toastCtrl.create({
-          message: "No more products.",
-          duration: 3000
-        }).present();
+        // this.toastCtrl.create({
+        //   message: "No more products.",
+        //   duration: 3000
+        // }).present();
       }
 
       event.complete();
@@ -55,7 +54,7 @@ export class SearchPage {
   }
 
   openProductPage(product) {
-    this.navCtrl.push(ProductDetailsPage, {"product": product});
+    this.navCtrl.push('ProductDetailsPage', {"product": product});
   }
   
 

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
-import { HomePage } from '../home/home';
 import * as WC from 'woocommerce-api';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
@@ -34,9 +32,9 @@ export class SignupPage {
     this.billing_shipping_same = false;
 
     this.WooCommerce = WC({
-      url: "http://localhost/woocommercestore",
-      consumerKey: "ck_91260d8413594f2a968e120c2646f5d0f1112793",
-      consumerSecret: "cs_18af990b31a0fbb5eab46767ead504a3caaaf201"
+      url: "http://app.tinkertech.biz",
+      consumerKey: "ck_443268489763fa3622be2c9a7721ae33d3e24833",
+      consumerSecret: "cs_4fe14a3953f4b4abfdb44e4a0ab3d61f4d5ca2e5"
     });
   }
 
@@ -165,14 +163,14 @@ export class SignupPage {
       this.passWord = this.newUser.password;
 
       let response = (JSON.parse(data.body));
-
+//auto-login after signup
       if(response.customer){
         this.alertCtrl.create({
           title: "Account successfully created",
           message: "Click OK to proceed",
           buttons: [{
             text: "Ok",
-            handler: ()=> {
+            handler: ()=> { //login
               this.http.get("http://localhost/woocommercestore/api/auth/generate_auth_cookie/?insecure=cool&username=" + this.userName + "&password=" + this.passWord)
                 .subscribe( (res)=> {
                   console.log(res.json());

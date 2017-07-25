@@ -9,11 +9,11 @@
 
 <ion-content>
 
-  <ion-fab right top edge (click)="openCart()">
+  <!-- <ion-fab right top edge (click)="openCart()">
     <button ion-fab color="danger">
       <ion-icon name="md-cart"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab> -->
 
   <ion-card>
 
@@ -27,14 +27,14 @@
       <ion-card-title>
         {{product.title}} &nbsp;
         <ion-chip *ngFor="let cat of product.categories" style="margin-left:5px">
-          <ion-label color="danger">{{cat}}</ion-label>  
+          <ion-label color="dark">{{cat}}</ion-label>  
         </ion-chip>  
       </ion-card-title>
 
-      <p [innerHTML]="product.price_html" style="color:red;"></p>
+      <p [innerHTML]="product.price_html" style="color:#222;"></p>
       <p [innerHTML]="product.short_description"></p>
       
-      <button ion-button icon-left block outline color="danger" (click)="addToCart(product)">
+      <button ion-button icon-left block outline color="dark" (click)="addToCart(product)">
         <ion-icon name="md-cart"></ion-icon>
         Add to cart
       </button>

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams ,ToastController, ModalController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,ToastController, ModalController} from 'ionic-angular';
 import * as WC from 'woocommerce-api';
 
 import { Storage } from '@ionic/storage';
 import { CartPage } from '../cart/cart';
 
+@IonicPage({})
 @Component({
   selector: 'page-product-details',
   templateUrl: 'product-details.html',
@@ -14,6 +15,7 @@ export class ProductDetailsPage {
   product: any;
   WooCommerce: any;
   reviews: any[] = [];
+  searchQuery: string = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public storage: Storage, public modalCtrl: ModalController) {
 
@@ -21,9 +23,9 @@ export class ProductDetailsPage {
     console.log(this.product);
 
     this.WooCommerce = WC({
-      url: "http://localhost/woocommercestore",
-      consumerKey: "ck_91260d8413594f2a968e120c2646f5d0f1112793",
-      consumerSecret: "cs_18af990b31a0fbb5eab46767ead504a3caaaf201"
+      url: "http://app.tinkertech.biz",
+      consumerKey: "ck_443268489763fa3622be2c9a7721ae33d3e24833",
+      consumerSecret: "cs_4fe14a3953f4b4abfdb44e4a0ab3d61f4d5ca2e5"
     });
 
     this.WooCommerce.getAsync('products/' +this.product.id+ '/reviews').then((data)=> {
@@ -80,11 +82,16 @@ export class ProductDetailsPage {
       })
 
     });
-
   }
 
   openCart() {
     this.modalCtrl.create(CartPage).present();
+  }
+
+  onSearch(event) {
+    if(this.searchQuery.length > 0) {
+      this.navCtrl.push('SearchPage', {"searchQuery": this.searchQuery});
+    }
   }
 
 }

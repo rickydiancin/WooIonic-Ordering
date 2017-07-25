@@ -1,8 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
+
 page-home {
 
-    ion-card{
-        margin: 0 !important;
-        width: 100% !important;
-    }
+    .card-background-page {
+ 
+        ion-card {
+            margin: 0 !important;
+            width: 100% !important;
+            position: relative;
+            text-align: center;
+            max-height: 140px;
+        }
 
+        .card-title {
+            position: absolute;
+            top: 41%;
+            font-size: 1.1em;
+            font-weight: normal;
+            width: 100%;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .card-opacity {
+            position: absolute;
+            top: 0%;
+            width: 100%;
+            background: rgba(0,0,0,0.6);
+            height: 100%;
+        }
+
+    }
+    
 }

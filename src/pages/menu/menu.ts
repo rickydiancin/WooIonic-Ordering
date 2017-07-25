@@ -2,36 +2,34 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import * as WC from 'woocommerce-api';
 
-import { HomePage } from '../home/home';
-import { ProductsByCategoryPage } from '../products-by-category/products-by-category';
-import { SignupPage } from '../signup/signup';
-import { LoginPage } from '../login/login';
 import { Storage } from '@ionic/storage';
-import { CartPage } from '../cart/cart';
-import { AccountInfoPage } from '../account-info/account-info';
 
+@IonicPage({})
 @Component({
   selector: 'page-menu',
   templateUrl: 'menu.html',
 })
 export class MenuPage {
 
-  homePage: Component;
   WooCommerce: any;
   categories: any[];
   @ViewChild('content') childNavCtrl: NavController;
   loggedIn: boolean;
+  avatar: boolean;
+  profile: any;
   user: any;
+  homePage: any = Component;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public modalCtrl: ModalController) {
-    this.homePage = HomePage;
+    
+    this.homePage = 'HomePage';
     this.categories = [];
     this.user = {};
 
     this.WooCommerce = WC({
-      url: "http://localhost/woocommercestore",
-      consumerKey: "ck_91260d8413594f2a968e120c2646f5d0f1112793",
-      consumerSecret: "cs_18af990b31a0fbb5eab46767ead504a3caaaf201"
+      url: "http://app.tinkertech.biz",
+      consumerKey: "ck_443268489763fa3622be2c9a7721ae33d3e24833",
+      consumerSecret: "cs_4fe14a3953f4b4abfdb44e4a0ab3d61f4d5ca2e5"
     });
 
     this.WooCommerce.getAsync("products/categories").then((data) => {
@@ -90,21 +88,21 @@ export class MenuPage {
   }
 
   goHome() {
-    this.childNavCtrl.setRoot(HomePage);
+    this.childNavCtrl.setRoot('HomePage');
   }
 
   openCategoryPage(category) {
     //this.navCtrl.setRoot(ProductsByCategoryPage,{"category": category});
-    this.childNavCtrl.setRoot(ProductsByCategoryPage,{"category": category});
+    this.childNavCtrl.setRoot('ProductsByCategoryPage',{"category": category});
   }
 
   openPage(pageName: String){
 
     if(pageName=="signup") {
-      this.navCtrl.push(SignupPage);
+      this.navCtrl.push('SignupPage');
     }
     if(pageName=="login") {
-      this.navCtrl.push(LoginPage);
+      this.navCtrl.push('LoginPage');
     }
     if(pageName=="logout") {
       this.storage.remove("userLoginInfo").then( ()=> {
@@ -113,14 +111,14 @@ export class MenuPage {
       })
     }
     if(pageName=="cart") {
-      let modal = this.modalCtrl.create(CartPage);
+      let modal = this.modalCtrl.create('CartPage');
       modal.present();
     }
 
   }
 
   accountInfo() {
-    this.childNavCtrl.setRoot(AccountInfoPage);
+    this.childNavCtrl.setRoot('AccountInfoPage');
   }
 
 
